@@ -11,8 +11,8 @@ function getExclude {
 
 
 function getDepth {
-  $global:maxDepth = [int](Read-Host "What depth?");
-  if(($global:maxDepth.GetType().FullName) -ne ((2).GetType().FullName)) {
+  $script:maxDepth = [int](Read-Host "What depth?");
+  if(($script:maxDepth.GetType().FullName) -ne ((2).GetType().FullName)) {
     Write-Host "Depth must be an integer";
     getDepth;}
 }
@@ -29,7 +29,7 @@ Write-Host "Scanning...";
 $longPaths=@();
 $pathDepth=($spath -split '[\\/]').Count;
 
-(ls $spath -Directory -Recurse -Depth ($global:maxDepth)) |
+(ls $spath -Directory -Recurse -Depth ($script:maxDepth)) |
   %{
     $bob=$true;
     $splCD = $_.FullName.split('\');
@@ -39,7 +39,7 @@ $pathDepth=($spath -split '[\\/]').Count;
       }
     }
     if($bob){
-      if(($_.FullName -split '[\\/]').Count -gt ($pathDepth-1+$global:maxDepth)) {$longPaths+=$_.FullName;}
+      if(($_.FullName -split '[\\/]').Count -gt ($pathDepth-1+$script:maxDepth)) {$longPaths+=$_.FullName;}
     }
   };
 
