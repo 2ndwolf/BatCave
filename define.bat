@@ -1,0 +1,1 @@
+start chrome www.google.ca/search?q=define+%~1
